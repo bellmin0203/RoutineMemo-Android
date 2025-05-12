@@ -1,5 +1,6 @@
 package com.jm.routinememo
 
+import androidx.room.gradle.RoomExtension
 import com.google.devtools.ksp.gradle.KspExtension
 import com.jm.routinememo.extension.libs
 import org.gradle.api.Plugin
@@ -20,8 +21,14 @@ class AndroidRoomPlugin : Plugin<Project> {
                 arg("room.generateKotlin", "true")
             }
 
+            extensions.configure<RoomExtension> {
+                // The schemas directory contains a schema file for each version of the Room database.
+                // This is required to enable Room auto migrations.
+                // See https://developer.android.com/reference/kotlin/androidx/room/AutoMigration.
+                schemaDirectory("$projectDir/schemas")
+            }
+
             dependencies {
-                val libs = extensions.libs
                 "implementation"(libs.findLibrary("room.runtime").get())
                 "implementation"(libs.findLibrary("room.ktx").get())
                 "ksp"(libs.findLibrary("room.compiler").get())

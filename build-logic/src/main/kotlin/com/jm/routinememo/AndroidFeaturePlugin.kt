@@ -11,6 +11,7 @@ import org.gradle.kotlin.dsl.dependencies
 class AndroidFeaturePlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
+            println(">>> AndroidFeaturePlugin applying...")
             apply(plugin = "rm.android.library")
             apply(plugin = "rm.android.compose")
             apply(plugin = "org.jetbrains.kotlin.plugin.serialization")
@@ -20,7 +21,6 @@ class AndroidFeaturePlugin : Plugin<Project> {
             }
 
             dependencies {
-                val libs = extensions.libs
                 "implementation"(libs.findLibrary("androidx.hilt.navigation.compose").get())
                 "implementation"(libs.findLibrary("androidx.lifecycle.runtime.compose").get())
                 "implementation"(libs.findLibrary("androidx.lifecycle.viewModel.compose").get())

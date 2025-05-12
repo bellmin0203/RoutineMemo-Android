@@ -21,12 +21,13 @@ dependencies {
     compileOnly(libs.kotlin.gradlePlugin)
     compileOnly(libs.ksp.gradlePlugin)
     compileOnly(libs.compose.gradlePlugin)
+    compileOnly(libs.room.gradlePlugin)
 }
 
 gradlePlugin {
     plugins {
         register("androidApplication") {
-            id = libs.plugins.rm.android.application.get().pluginId
+            id = "rm.android.application"
             implementationClass = "com.jm.routinememo.AndroidApplicationPlugin"
         }
 
@@ -41,7 +42,7 @@ gradlePlugin {
         }
 
         register("androidLibrary") {
-            id = libs.plugins.rm.android.library.get().pluginId
+            id = "rm.android.library"
             implementationClass = "com.jm.routinememo.AndroidLibraryPlugin"
         }
 

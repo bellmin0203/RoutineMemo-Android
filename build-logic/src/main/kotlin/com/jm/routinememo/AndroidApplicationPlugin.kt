@@ -10,10 +10,12 @@ import org.gradle.kotlin.dsl.configure
 class AndroidApplicationPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
+            println(">>> AndroidApplicationPlugin applying...")
             apply(plugin = "com.android.application")
 
             extensions.configure<ApplicationExtension> {
                 configureKotlinAndroid()
+                println(">>> configureKotlinAndroid done")
             }
         }
     }

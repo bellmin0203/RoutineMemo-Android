@@ -49,8 +49,8 @@ internal val Project.androidExtension: CommonExtension<*, *, *, *, *, *>
 /**
  * @return libs.versions.toml에 정의된 libs 카탈로그
  */
-internal val ExtensionContainer.libs: VersionCatalog
-    get() = getByType<VersionCatalogsExtension>().named( "libs")
+val Project.libs
+    get(): VersionCatalog = extensions.getByType<VersionCatalogsExtension>().named("libs")
 
 fun Project.setNamespace(name: String) {
     androidExtension.apply {

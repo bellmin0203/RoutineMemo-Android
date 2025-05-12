@@ -22,4 +22,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "RoutineMemo"
 include(":app")
- 
+include(":core:model")
+include(":core:database")

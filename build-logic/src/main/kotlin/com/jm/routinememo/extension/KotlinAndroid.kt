@@ -42,7 +42,6 @@ internal fun Project.configureKotlinAndroid() {
 
     configureKotlin()
 
-    val libs = extensions.libs
 }
 
 internal fun Project.configureKotlin() {

@@ -21,6 +21,20 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "RoutineMemo"
+
 include(":app")
-include(":core:model")
-include(":core:database")
+
+// core
+include(
+    ":core:ui",
+    ":core:util",
+    ":core:data",
+    ":core:model",
+    ":core:domain",
+    ":core:database",
+    ":core:datastore",
+    ":core:designsystem"
+)
+
+// feature
+include(":feature:home")

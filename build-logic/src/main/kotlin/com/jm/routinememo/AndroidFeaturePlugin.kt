@@ -27,6 +27,7 @@ class AndroidFeaturePlugin : Plugin<Project> {
                 "implementation"(libs.findLibrary("androidx.navigation.compose").get())
                 "implementation"(libs.findLibrary("kotlinx.serialization.json").get())
             }
+            println(">>> AndroidFeaturePlugin done")
         }
     }
 }

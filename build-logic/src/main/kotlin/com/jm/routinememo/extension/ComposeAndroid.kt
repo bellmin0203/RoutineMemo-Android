@@ -36,9 +36,9 @@ internal fun Project.configureComposeAndroid() {
         /**
          * Compose의 Recomposition Skipping 기능을 강화하는 설정
          * 더 엄격하게 UI가 변하지 않은 컴포저블을 Recomposition skip
+         * 기본값 켜짐
          */
-//        enableStrongSkippingMode.set(true)
-        featureFlags.add(ComposeFeatureFlag.StrongSkipping)
+//        featureFlags.add(ComposeFeatureFlag.StrongSkipping)
 
         // Compose가 생성한 코드에 원본 소스의 디버깅 정보를 포함
         includeSourceInformation.set(true)

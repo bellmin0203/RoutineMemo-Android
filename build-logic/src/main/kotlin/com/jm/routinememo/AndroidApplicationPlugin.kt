@@ -1,6 +1,7 @@
 package com.jm.routinememo
 
 import com.android.build.api.dsl.ApplicationExtension
+import com.jm.routinememo.extension.configureHiltAndroid
 import com.jm.routinememo.extension.configureKotlinAndroid
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -16,6 +17,9 @@ class AndroidApplicationPlugin : Plugin<Project> {
             extensions.configure<ApplicationExtension> {
                 configureKotlinAndroid()
                 println(">>> configureKotlinAndroid done")
+
+                configureHiltAndroid()
+                println(">>> configureHiltAndroid done")
             }
         }
     }

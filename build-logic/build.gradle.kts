@@ -27,7 +27,7 @@ dependencies {
 gradlePlugin {
     plugins {
         register("androidApplication") {
-            id = "rm.android.application"
+            id = libs.plugins.rm.android.application.get().pluginId
             implementationClass = "com.jm.routinememo.AndroidApplicationPlugin"
         }
 
@@ -42,7 +42,7 @@ gradlePlugin {
         }
 
         register("androidLibrary") {
-            id = "rm.android.library"
+            id = libs.plugins.rm.android.library.get().pluginId
             implementationClass = "com.jm.routinememo.AndroidLibraryPlugin"
         }
 
@@ -54,6 +54,11 @@ gradlePlugin {
         register("androidRoom") {
             id = libs.plugins.rm.android.room.get().pluginId
             implementationClass = "com.jm.routinememo.AndroidRoomPlugin"
+        }
+
+        register("kotlinLibrary") {
+            id = libs.plugins.rm.kotlin.library.get().pluginId
+            implementationClass = "com.jm.routinememo.KotlinLibraryPlugin"
         }
     }
 }

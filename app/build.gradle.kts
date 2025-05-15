@@ -26,6 +26,9 @@ android {
 }
 
 dependencies {
-    implementation(projects.feature.home)
     implementation(libs.androidx.activity.compose)
+
+    implementation(projects.core.designsystem)
+    implementation(projects.feature.home)
+
 }

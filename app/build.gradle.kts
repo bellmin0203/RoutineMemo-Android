@@ -1,13 +1,13 @@
 plugins {
-    alias(libs.plugins.rm.android.application)
-    alias(libs.plugins.rm.android.compose)
+    alias(libs.plugins.tu.android.application)
+    alias(libs.plugins.tu.android.compose)
 }
 
 android {
-    namespace = "com.jm.routinememo"
+    namespace = "com.jm.thinkup"
 
     defaultConfig {
-        applicationId = "com.jm.routinememo"
+        applicationId = "com.jm.thinkup"
         versionCode = 1
         versionName = "1.0"
 

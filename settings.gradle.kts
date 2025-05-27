@@ -20,7 +20,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "RoutineMemo"
+rootProject.name = "ThinkUp"
 
 include(":app")
 

@@ -119,10 +119,10 @@ kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 room = { id = "androidx.room", version.ref = "room" }
 
 # Plugins defined by this project
-rm-android-application = { id = "rm.android.application", version = "unspecified" }
-rm-android-hilt = { id = "rm.android.hilt" }
-rm-android-compose = { id = "rm.android.compose" }
-rm-android-library = { id = "rm.android.library" }
-rm-kotlin-library = { id = "rm.kotlin.library" }
-rm-android-feature = { id = "rm.android.feature" }
-rm-android-room = { id = "rm.android.room" }
+tu-android-application = { id = "tu.android.application", version = "unspecified" }
+tu-android-hilt = { id = "tu.android.hilt" }
+tu-android-compose = { id = "tu.android.compose" }
+tu-android-library = { id = "tu.android.library" }
+tu-kotlin-library = { id = "tu.kotlin.library" }
+tu-android-feature = { id = "tu.android.feature" }
+tu-android-room = { id = "tu.android.room" }

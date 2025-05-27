@@ -15,11 +15,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
-import com.jm.designsystem.theme.RoutineMemoTheme
 import com.jm.designsystem.theme.ThemePreviews
+import com.jm.designsystem.theme.ThinkUpTheme
 
 @Composable
-fun RMButton(
+fun ThinkUpButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
     enabled: Boolean = true,
@@ -36,13 +36,13 @@ fun RMButton(
         ),
         contentPadding = contentPadding,
     ) {
-        RMButtonContent(text = text, leadingIcon = leadingIcon)
+        ThinkUpButtonContent(text = text, leadingIcon = leadingIcon)
     }
 }
 
 
 @Composable
-private fun RMButtonContent(
+private fun ThinkUpButtonContent(
     text: String,
     leadingIcon: ImageVector? = null
 ) {
@@ -61,9 +61,9 @@ private fun RMButtonContent(
 
 @ThemePreviews
 @Composable
-private fun RMButtonPreview() {
-    RoutineMemoTheme {
-        RMButton(
+private fun ThinkUpButtonPreview() {
+    ThinkUpTheme {
+        ThinkUpButton(
             onClick = {},
             text = "TEST"
         )
@@ -72,9 +72,9 @@ private fun RMButtonPreview() {
 
 @ThemePreviews
 @Composable
-private fun RMButtonLeadingIconPreview() {
-    RoutineMemoTheme {
-        RMButton(
+private fun ThinkUpButtonLeadingIconPreview() {
+    ThinkUpTheme {
+        ThinkUpButton(
             onClick = {},
             text = "TEST",
             leadingIcon = Icons.Rounded.Add

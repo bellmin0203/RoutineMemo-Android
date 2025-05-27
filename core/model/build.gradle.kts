@@ -1,7 +1,7 @@
-import com.jm.routinememo.extension.setNamespace
+import com.jm.thinkup.extension.setNamespace
 
 plugins {
-    alias(libs.plugins.rm.android.library)
+    alias(libs.plugins.tu.android.library)
 }
 
 android {

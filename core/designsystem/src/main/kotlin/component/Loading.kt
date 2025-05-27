@@ -10,9 +10,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.graphics.shapes.RoundedPolygon
-import com.jm.designsystem.theme.RoutineMemoTheme
+import com.jm.designsystem.theme.ThinkUpTheme
 import com.jm.designsystem.theme.ThemePreviews
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
@@ -52,7 +51,7 @@ fun ContainedLoadingChip(
 @ThemePreviews
 @Composable
 private fun LoadingChipPreview() {
-    RoutineMemoTheme {
+    ThinkUpTheme {
         LoadingChip()
     }
 }
@@ -60,7 +59,7 @@ private fun LoadingChipPreview() {
 @ThemePreviews
 @Composable
 private fun ContainedLoadingChipPreview() {
-    RoutineMemoTheme {
+    ThinkUpTheme {
         ContainedLoadingChip()
     }
 }

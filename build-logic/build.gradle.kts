@@ -27,38 +27,38 @@ dependencies {
 gradlePlugin {
     plugins {
         register("androidApplication") {
-            id = libs.plugins.rm.android.application.get().pluginId
-            implementationClass = "com.jm.routinememo.AndroidApplicationPlugin"
+            id = libs.plugins.tu.android.application.get().pluginId
+            implementationClass = "com.jm.thinkup.AndroidApplicationPlugin"
         }
 
         register("androidHilt") {
-            id = libs.plugins.rm.android.hilt.get().pluginId
-            implementationClass = "com.jm.routinememo.HiltAndroidPlugin"
+            id = libs.plugins.tu.android.hilt.get().pluginId
+            implementationClass = "com.jm.thinkup.HiltAndroidPlugin"
         }
 
         register("androidCompose") {
-            id = libs.plugins.rm.android.compose.get().pluginId
-            implementationClass = "com.jm.routinememo.AndroidComposePlugin"
+            id = libs.plugins.tu.android.compose.get().pluginId
+            implementationClass = "com.jm.thinkup.AndroidComposePlugin"
         }
 
         register("androidLibrary") {
-            id = libs.plugins.rm.android.library.get().pluginId
-            implementationClass = "com.jm.routinememo.AndroidLibraryPlugin"
+            id = libs.plugins.tu.android.library.get().pluginId
+            implementationClass = "com.jm.thinkup.AndroidLibraryPlugin"
         }
 
         register("androidFeature") {
-            id = libs.plugins.rm.android.feature.get().pluginId
-            implementationClass = "com.jm.routinememo.AndroidFeaturePlugin"
+            id = libs.plugins.tu.android.feature.get().pluginId
+            implementationClass = "com.jm.thinkup.AndroidFeaturePlugin"
         }
 
         register("androidRoom") {
-            id = libs.plugins.rm.android.room.get().pluginId
-            implementationClass = "com.jm.routinememo.AndroidRoomPlugin"
+            id = libs.plugins.tu.android.room.get().pluginId
+            implementationClass = "com.jm.thinkup.AndroidRoomPlugin"
         }
 
         register("kotlinLibrary") {
-            id = libs.plugins.rm.kotlin.library.get().pluginId
-            implementationClass = "com.jm.routinememo.KotlinLibraryPlugin"
+            id = libs.plugins.tu.kotlin.library.get().pluginId
+            implementationClass = "com.jm.thinkup.KotlinLibraryPlugin"
         }
     }
 }

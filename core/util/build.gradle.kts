@@ -1,3 +1,3 @@
 plugins {
-    alias(libs.plugins.rm.kotlin.library)
+    alias(libs.plugins.tu.kotlin.library)
 }

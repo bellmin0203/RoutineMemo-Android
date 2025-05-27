@@ -1,5 +1,6 @@
 package com.jm.designsystem.theme
 
+import android.content.res.Configuration
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -8,32 +9,38 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
 
-// Light ColorScheme
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_NO, name = "Light theme")
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, name = "Dark theme")
+annotation class ThemePreviews
+
 val LightColorScheme = lightColorScheme(
-    primary = Green500,
+    primary = CoffeeBrown500,
     onPrimary = White,
-    primaryContainer = Green100,
-    onPrimaryContainer = Green800,
+    primaryContainer = CoffeeBrown300,
+    onPrimaryContainer = CoffeeBrown700,
 
-    secondary = Blue300,
-    onSecondary = White,
-    secondaryContainer = Blue50,
-    onSecondaryContainer = Blue800,
+    secondary = LatteBeige500,
+    onSecondary = Black,
+    secondaryContainer = LatteBeige300,
+    onSecondaryContainer = LatteBeige700,
 
-    tertiary = Yellow300,
-    onTertiary = Black,
-    tertiaryContainer = Yellow100,
-    onTertiaryContainer = Yellow800,
+    tertiary = Espresso500,
+    onTertiary = White,
+    tertiaryContainer = Espresso300,
+    onTertiaryContainer = Espresso700,
 
     background = Grey50,
-    onBackground = Grey800,
+    onBackground = CoffeeBrown700,
 
     surface = White,
-    onSurface = Grey800,
-    surfaceVariant = Grey200,
-    onSurfaceVariant = Grey600,
+    onSurface = CoffeeBrown700,
+    surfaceVariant = Grey100,
+    onSurfaceVariant = Grey800,
 
     error = Red500,
     onError = White,
@@ -41,51 +48,63 @@ val LightColorScheme = lightColorScheme(
     onErrorContainer = Red900,
 
     outline = Grey300,
-    outlineVariant = Grey200,
+    outlineVariant = Grey100,
     scrim = Black,
 
     inverseSurface = Grey800,
     inverseOnSurface = Grey100,
-    inversePrimary = Green600,
+    inversePrimary = CoffeeBrown700,
 )
 
-// Dark ColorScheme
 val DarkColorScheme = darkColorScheme(
-    primary = Green700,
+    primary = CoffeeBrown300,
     onPrimary = Black,
-    primaryContainer = Green600,
+    primaryContainer = CoffeeBrown500,
     onPrimaryContainer = White,
 
-    secondary = Blue700,
-    onSecondary = White,
-    secondaryContainer = Blue800,
+    secondary = LatteBeige300,
+    onSecondary = Black,
+    secondaryContainer = LatteBeige500,
     onSecondaryContainer = White,
 
-    tertiary = Yellow700,
-    onTertiary = White,
-    tertiaryContainer = Yellow800,
-    onTertiaryContainer = Yellow100,
+    tertiary = Espresso300,
+    onTertiary = Black,
+    tertiaryContainer = Espresso500,
+    onTertiaryContainer = White,
 
-    background = Grey900,
+    background = Grey800,
     onBackground = Grey100,
 
-    surface = Grey800,
-    onSurface = Grey100,
+    surface = CoffeeBrown700,
+    onSurface = LatteBeige300,
     surfaceVariant = Grey600,
-    onSurfaceVariant = Grey200,
+    onSurfaceVariant = White,
 
     error = Red500,
     onError = White,
-    errorContainer = Red300,
-    onErrorContainer = Red900,
+    errorContainer = Red900,
+    onErrorContainer = White,
 
     outline = Grey300,
     outlineVariant = Grey600,
     scrim = Black,
 
     inverseSurface = Grey100,
-    inverseOnSurface = Grey900,
-    inversePrimary = Green300,
+    inverseOnSurface = Grey800,
+    inversePrimary = CoffeeBrown300,
+)
+
+
+@Immutable
+data class ColorFamily(
+    val color: Color,
+    val onColor: Color,
+    val colorContainer: Color,
+    val onColorContainer: Color
+)
+
+val unspecified_scheme = ColorFamily(
+    Color.Unspecified, Color.Unspecified, Color.Unspecified, Color.Unspecified
 )
 
 

@@ -33,9 +33,15 @@ include(
     ":core:domain",
     ":core:database",
     ":core:datastore",
-    ":core:designsystem"
+    ":core:designsystem",
     ":core:navigation"
 )
 
 // feature
-include(":feature:home")
+include(
+    ":feature:home",
+    ":feature:goal",
+    ":feature:obstacle",
+    ":feature:action",
+    ":feature:progress"
+)

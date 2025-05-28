@@ -34,6 +34,7 @@ include(
     ":core:database",
     ":core:datastore",
     ":core:designsystem"
+    ":core:navigation"
 )
 
 // feature

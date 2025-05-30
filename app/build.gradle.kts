@@ -14,6 +14,12 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -27,8 +33,13 @@ android {
 
 dependencies {
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.navigation.compose)
 
     implementation(projects.core.designsystem)
-    implementation(projects.feature.home)
+    implementation(projects.core.navigation)
 
+    implementation(projects.feature.home)
+    implementation(projects.feature.goal)
+    implementation(projects.feature.obstacle)
+    implementation(projects.feature.progress)
 }

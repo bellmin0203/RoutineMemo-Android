@@ -12,6 +12,7 @@ android {
 dependencies {
     implementation(libs.androidx.appcompat)
     api(libs.androidx.compose.material3.windowSizeClass)
+    api(libs.androidx.compose.material3.adaptive)
     api(libs.androidx.compose.material3.navigationSuite)
     api(libs.androidx.compose.material.iconsExtended)
     api(libs.androidx.compose.ui)

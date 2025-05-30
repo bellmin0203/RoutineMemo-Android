@@ -1,4 +1,4 @@
-package component
+package com.jm.designsystem.component
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.ContainedLoadingIndicator
@@ -11,8 +11,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.graphics.shapes.RoundedPolygon
-import com.jm.designsystem.theme.ThinkUpTheme
 import com.jm.designsystem.theme.ThemePreviews
+import com.jm.designsystem.theme.ThinkUpTheme
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable

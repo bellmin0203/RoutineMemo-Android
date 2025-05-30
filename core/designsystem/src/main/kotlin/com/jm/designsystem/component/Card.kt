@@ -1,4 +1,4 @@
-package component
+package com.jm.designsystem.component
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
@@ -8,8 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.jm.designsystem.theme.ThinkUpTheme
 import com.jm.designsystem.theme.ThemePreviews
+import com.jm.designsystem.theme.ThinkUpTheme
 
 @Composable
 fun ThinkUpCard(

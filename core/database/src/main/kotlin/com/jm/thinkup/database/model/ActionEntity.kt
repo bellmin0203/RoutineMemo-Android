@@ -3,6 +3,7 @@ package com.jm.thinkup.database.model
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import com.jm.thinkup.domain.model.ActionData
 
 @Entity(
     tableName = "action_tb",
@@ -34,3 +35,17 @@ data class ActionEntity(
     val createdAt: Long = System.currentTimeMillis(),
     val extendEndDate: Boolean = false,
 )
+
+fun ActionEntity.toDomainModel(): ActionData =
+    ActionData(
+        goalId = goalId,
+        obstacleId = obstacleId,
+        description = description,
+        isRepeat = isRepeat,
+        repeatType = repeatType,
+        endDate = endDate,
+        notificationEnabled = notificationEnabled,
+        notificationTime = notificationTime,
+        createdAt = createdAt,
+        extendEndDate = extendEndDate,
+    )

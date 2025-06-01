@@ -3,6 +3,7 @@ package com.jm.thinkup.database.model
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import com.jm.thinkup.domain.model.Obstacle
 
 @Entity(
     tableName = "obstacle_tb",
@@ -20,3 +21,9 @@ data class ObstacleEntity(
     val goalId: Long,
     val description: String
 )
+
+fun ObstacleEntity.toDomainModel(): Obstacle =
+    Obstacle(
+        goalId = goalId,
+        description = description
+    )

@@ -12,6 +12,11 @@ import kotlinx.coroutines.flow.map
 class GoalsRepositoryImpl constructor(
     private val goalDao: GoalDao
 ) : GoalsRepository {
+    override suspend fun createGoal(goal: Goal): Boolean {
+        val rowId = goalDao.insertGoal(goal = goal.toEntity())
+        return rowId > 0
+    }
+
     override suspend fun getAllGoals(): Flow<List<Goal>> {
         return goalDao.getAllGoals().map { goalEntityList ->
             goalEntityList.map { goalEntity ->
@@ -24,12 +29,11 @@ class GoalsRepositoryImpl constructor(
         return goalDao.getGoalById(id.value)?.toDomainModel()
     }
 
-    override suspend fun createGoal(goal: Goal): Boolean {
-        val rowId = goalDao.insertGoal(goal = goal.toEntity())
-        return rowId > 0
-    }
-
     override suspend fun updateGoal(goal: Goal) {
         goalDao.updateGoal(goal = goal.toEntity())
+    }
+
+    override suspend fun deleteGoal(goal: Goal) {
+        goalDao.deleteGoal(goal.toEntity())
     }
 }

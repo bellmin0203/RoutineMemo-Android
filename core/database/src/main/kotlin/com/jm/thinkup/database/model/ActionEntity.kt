@@ -4,6 +4,9 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import com.jm.thinkup.domain.model.ActionData
+import com.jm.thinkup.domain.model.ActionId
+import com.jm.thinkup.domain.model.GoalId
+import java.time.Instant
 
 @Entity(
     tableName = "action_tb",
@@ -38,14 +41,31 @@ data class ActionEntity(
 
 fun ActionEntity.toDomainModel(): ActionData =
     ActionData(
-        goalId = goalId,
+        id = ActionId(id),
+        goalId = GoalId(goalId),
         obstacleId = obstacleId,
         description = description,
         isRepeat = isRepeat,
         repeatType = repeatType,
-        endDate = endDate,
+        endDate = Instant.ofEpochMilli(endDate),
         notificationEnabled = notificationEnabled,
         notificationTime = notificationTime,
-        createdAt = createdAt,
+        createdAt = Instant.ofEpochMilli(createdAt),
         extendEndDate = extendEndDate,
     )
+
+fun ActionData.toEntity(): ActionEntity =
+    ActionEntity(
+        id = id.value,
+        goalId = goalId.value,
+        obstacleId = obstacleId,
+        description = description,
+        isRepeat = isRepeat,
+        repeatType = repeatType,
+        endDate = endDate.toEpochMilli(),
+        notificationEnabled = notificationEnabled,
+        notificationTime = notificationTime,
+        createdAt = createdAt.toEpochMilli(),
+        extendEndDate = extendEndDate,
+    )
+

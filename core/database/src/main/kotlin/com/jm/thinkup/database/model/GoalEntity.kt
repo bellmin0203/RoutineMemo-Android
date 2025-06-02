@@ -3,6 +3,8 @@ package com.jm.thinkup.database.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.jm.thinkup.domain.model.Goal
+import com.jm.thinkup.domain.model.GoalId
+import java.time.Instant
 
 @Entity(tableName = "goal_tb")
 data class GoalEntity(
@@ -14,7 +16,16 @@ data class GoalEntity(
 
 fun GoalEntity.toDomainModel(): Goal =
     Goal(
+        id = GoalId(id),
         title = title,
-        deadlineDate = deadlineDate,
-        createdAt = createdAt
+        deadlineDate = Instant.ofEpochMilli(deadlineDate),
+        createdAt = Instant.ofEpochMilli(createdAt)
+    )
+
+fun Goal.toEntity(): GoalEntity =
+    GoalEntity(
+        id = id.value,
+        title = title,
+        deadlineDate = deadlineDate.toEpochMilli(),
+        createdAt = createdAt.toEpochMilli()
     )

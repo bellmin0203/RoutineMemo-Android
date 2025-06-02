@@ -1,5 +1,6 @@
 package com.jm.thinkup
 
+import com.jm.thinkup.extension.configureCoroutineKotlin
 import com.jm.thinkup.extension.configureKotlin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -10,6 +11,7 @@ class KotlinLibraryPlugin : Plugin<Project> {
         with(target) {
             apply(plugin = "org.jetbrains.kotlin.jvm")
             configureKotlin()
+            configureCoroutineKotlin()
         }
     }
 }

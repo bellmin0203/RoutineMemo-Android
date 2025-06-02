@@ -3,7 +3,9 @@ package com.jm.thinkup.database.model
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import com.jm.thinkup.domain.model.GoalId
 import com.jm.thinkup.domain.model.Obstacle
+import com.jm.thinkup.domain.model.ObstacleId
 
 @Entity(
     tableName = "obstacle_tb",
@@ -24,6 +26,14 @@ data class ObstacleEntity(
 
 fun ObstacleEntity.toDomainModel(): Obstacle =
     Obstacle(
-        goalId = goalId,
+        id = ObstacleId(id),
+        goalId = GoalId(goalId),
+        description = description
+    )
+
+fun Obstacle.toEntity(): ObstacleEntity =
+    ObstacleEntity(
+        id = id.value,
+        goalId = goalId.value,
         description = description
     )

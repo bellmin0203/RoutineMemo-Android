@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface GoalDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertGoal(goal: GoalEntity): Long
 
     @Update
@@ -21,7 +21,7 @@ interface GoalDao {
     suspend fun deleteGoal(goal: GoalEntity)
 
     @Query("SELECT * FROM goal_tb WHERE id = :id")
-    fun getGoalById(id: Long): Flow<GoalEntity?>
+    suspend fun getGoalById(id: Long): GoalEntity?
 
     @Query("SELECT * FROM goal_tb ORDER BY deadlineDate ASC")
     fun getAllGoals(): Flow<List<GoalEntity>>

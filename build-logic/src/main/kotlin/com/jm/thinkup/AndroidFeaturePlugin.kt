@@ -27,6 +27,8 @@ class AndroidFeaturePlugin : Plugin<Project> {
                 "implementation"(project(":core:data"))
                 "implementation"(project(":core:domain"))
                 "implementation"(project(":core:navigation"))
+                "implementation"(project(":core:common"))
+                "implementation"(project(":core:util"))
 
                 "implementation"(libs.findLibrary("androidx.hilt.navigation.compose").get())
                 "implementation"(libs.findLibrary("androidx.lifecycle.runtime.compose").get())

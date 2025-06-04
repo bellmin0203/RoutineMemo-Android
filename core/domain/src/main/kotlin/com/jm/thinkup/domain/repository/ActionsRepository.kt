@@ -26,7 +26,7 @@ interface ActionsRepository {
         actionId: ActionId,
         completionEndDate: Instant,
         isCompleted: Boolean
-    )
+    ): Result<Boolean>
 
     suspend fun getActionCompletionsByActionId(actionId: ActionId): Flow<List<ActionCompletion>?>
 

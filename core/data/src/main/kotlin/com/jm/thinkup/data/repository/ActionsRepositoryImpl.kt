@@ -1,6 +1,7 @@
 package com.jm.thinkup.data.repository
 
 import android.util.Log
+import com.jm.common.di.IoDispatcher
 import com.jm.thinkup.database.dao.ActionDao
 import com.jm.thinkup.database.model.toDomainModel
 import com.jm.thinkup.database.model.toEntity
@@ -10,39 +11,46 @@ import com.jm.thinkup.domain.model.ActionId
 import com.jm.thinkup.domain.model.GoalId
 import com.jm.thinkup.domain.model.ObstacleId
 import com.jm.thinkup.domain.repository.ActionsRepository
+import com.jm.util.mapListToDomainModel
+import com.jm.util.mapNullableListToDomainModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.withContext
 import java.time.Instant
 
 class ActionsRepositoryImpl constructor(
-    private val actionDao: ActionDao
+    private val actionDao: ActionDao,
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) : ActionsRepository {
     override suspend fun createAction(action: ActionData) {
-        actionDao.insertAction(action = action.toEntity())
+        withContext(ioDispatcher) {
+            actionDao.insertAction(action = action.toEntity())
+        }
     }
 
     override suspend fun getActionsByGoalId(goalId: GoalId): Flow<List<ActionData>> {
-        return actionDao.getActionsByGoalId(goalId = goalId.value).map { actionEntityList ->
-            actionEntityList.map { actionEntity ->
-                actionEntity.toDomainModel()
-            }
-        }
+        return actionDao.getActionsByGoalId(goalId = goalId.value)
+            .mapListToDomainModel { toDomainModel() }
+            .flowOn(ioDispatcher)
     }
 
     override suspend fun getActionsByObstacleId(obstacleId: ObstacleId): Flow<List<ActionData>> {
-        return actionDao.getActionsByObstacleId(obstacleId.value).map { obstacleEntityList ->
-            obstacleEntityList.map { obstacleEntity ->
-                obstacleEntity.toDomainModel()
-            }
-        }
+        return actionDao.getActionsByObstacleId(obstacleId.value)
+            .mapListToDomainModel { toDomainModel() }
+            .flowOn(ioDispatcher)
     }
 
     override suspend fun updateAction(action: ActionData) {
-        actionDao.updateAction(action = action.toEntity())
+        withContext(ioDispatcher) {
+            actionDao.updateAction(action = action.toEntity())
+        }
     }
 
     override suspend fun deleteAction(action: ActionData) {
-        actionDao.deleteAction(action = action.toEntity())
+        withContext(ioDispatcher) {
+            actionDao.deleteAction(action = action.toEntity())
+        }
     }
 
 
@@ -53,50 +61,53 @@ class ActionsRepositoryImpl constructor(
         actionId: ActionId,
         completionEndDate: Instant,
         isCompleted: Boolean
-    ) {
-        // Get ActionCompletionEntity by actionId and completionEndDate
-        val actionCompletionEntity = actionDao.getActionCompletionByDate(
-            actionId = actionId.value,
-            date = completionEndDate.toEpochMilli()
-        )
+    ): Result<Boolean> {
+        return runCatching {
+            withContext(ioDispatcher) {
+                // Get ActionCompletionEntity by actionId and completionEndDate
+                val actionCompletionEntity = actionDao.getActionCompletionByDate(
+                    actionId = actionId.value,
+                    targetDate = completionEndDate.toEpochMilli()
+                )
 
-        // Update ActionCompletionEntity if found, otherwise print log
-        if (actionCompletionEntity != null) {
-            val updatedEntity = actionCompletionEntity.copy(isCompleted = isCompleted)
-            actionDao.updateActionCompletion(updatedEntity)
-        } else {
-            Log.w(
-                "ActionsRepository",
-                "Attempted to update a non-existent action completion. ActionId: ${actionId.value}, Date: $completionEndDate"
-            )
+                // Update ActionCompletionEntity if found, otherwise print log
+                if (actionCompletionEntity != null) {
+                    val updatedEntity = actionCompletionEntity.copy(isCompleted = isCompleted)
+                    actionDao.updateActionCompletion(updatedEntity)
+                    true
+                } else {
+                    Log.w(
+                        "ActionsRepository",
+                        "Attempted to update a non-existent action completion. ActionId: ${actionId.value}, Date: $completionEndDate"
+                    )
+                    false
+                }
+            }
         }
     }
 
     override suspend fun getActionCompletionsByActionId(actionId: ActionId): Flow<List<ActionCompletion>> {
         return actionDao.getActionCompletionsByActionId(actionId = actionId.value)
-            .map { actionCompletionEntityList ->
-                actionCompletionEntityList.map { actionCompletionEntity ->
-                    actionCompletionEntity.toDomainModel()
-                }
-            }
+            .mapListToDomainModel { toDomainModel() }
+            .flowOn(ioDispatcher)
     }
 
     override suspend fun getActionCompletionsBeforeDate(
         actionId: ActionId,
         date: Instant
     ): List<ActionCompletion>? {
-        return actionDao.getActionCompletionBeforeDate(
-            actionId = actionId.value,
-            date = date.toEpochMilli()
-        )?.map {
-            it.toDomainModel()
+        return withContext(ioDispatcher) {
+            actionDao.getActionCompletionBeforeDate(
+                actionId = actionId.value,
+                targetDate = date.toEpochMilli()
+            ).mapNullableListToDomainModel { toDomainModel() }
         }
     }
 
     override suspend fun getCompletedActions(actionId: ActionId): Flow<List<ActionData>?> {
-        return actionDao.getCompletedActions(actionId = actionId.value).map { actionEntityList ->
-            actionEntityList?.map { it.toDomainModel() }
-        }
+        return actionDao.getCompletedActions(actionId = actionId.value)
+            .mapNullableListToDomainModel { toDomainModel() }
+            .flowOn(ioDispatcher)
     }
 
     override suspend fun getCompletedActionsBeforeDate(
@@ -106,9 +117,8 @@ class ActionsRepositoryImpl constructor(
         return actionDao.getCompletedActionsBeforeDate(
             actionId = actionId.value,
             targetDate = date.toEpochMilli()
-        ).map { actionEntityList ->
-            actionEntityList?.map { it.toDomainModel() }
-        }
+        ).mapNullableListToDomainModel { toDomainModel() }
+            .flowOn(ioDispatcher)
     }
 
     override suspend fun getCompletedActionsByDate(
@@ -118,8 +128,7 @@ class ActionsRepositoryImpl constructor(
         return actionDao.getCompletedActionsByDate(
             actionId = actionId.value,
             targetDate = date.toEpochMilli()
-        ).map { actionEntityList ->
-            actionEntityList?.map { it.toDomainModel() }
-        }
+        ).mapNullableListToDomainModel { toDomainModel() }
+            .flowOn(ioDispatcher)
     }
 }

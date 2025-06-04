@@ -14,6 +14,8 @@ dependencies {
     implementation(projects.core.datastore)
     implementation(projects.core.database)
     implementation(projects.core.domain)
+    implementation(projects.core.util)
+    implementation(projects.core.common)
 
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.kotlinx.datetime)

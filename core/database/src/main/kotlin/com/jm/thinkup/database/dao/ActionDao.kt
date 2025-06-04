@@ -34,16 +34,19 @@ interface ActionDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertActionCompletion(actionCompletion: ActionCompletionsEntity)
 
-    @Query("SELECT * FROM action_completions_tb WHERE actionId = :actionId AND completionEndDate = :date")
-    suspend fun getActionCompletionByDate(actionId: Long, date: Long): ActionCompletionsEntity?
+    @Query("SELECT * FROM action_completions_tb WHERE actionId = :actionId AND completionEndDate = :targetDate")
+    suspend fun getActionCompletionByDate(
+        actionId: Long,
+        targetDate: Long
+    ): ActionCompletionsEntity?
 
     @Query("SELECT * FROM action_completions_tb WHERE actionId = :actionId")
     suspend fun getActionCompletionsByActionId(actionId: Long): Flow<List<ActionCompletionsEntity>>
 
-    @Query("SELECT * FROM action_completions_tb WHERE actionId = :actionId AND completionEndDate <= :date")
+    @Query("SELECT * FROM action_completions_tb WHERE actionId = :actionId AND completionEndDate <= :targetDate")
     suspend fun getActionCompletionBeforeDate(
         actionId: Long,
-        date: Long
+        targetDate: Long
     ): List<ActionCompletionsEntity>?
 
     @Query(

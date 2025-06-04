@@ -1,11 +1,9 @@
 package com.jm.thinkup.data.di
 
-import com.jm.thinkup.data.repository.ActionCompletionsRepositoryImpl
 import com.jm.thinkup.data.repository.ActionsRepositoryImpl
 import com.jm.thinkup.data.repository.GoalsRepositoryImpl
 import com.jm.thinkup.data.repository.ObstaclesRepositoryImpl
 import com.jm.thinkup.data.repository.ProgressRepositoryImpl
-import com.jm.thinkup.domain.repository.ActionCompletionsRepository
 import com.jm.thinkup.domain.repository.ActionsRepository
 import com.jm.thinkup.domain.repository.GoalsRepository
 import com.jm.thinkup.domain.repository.ObstaclesRepository
@@ -33,11 +31,6 @@ abstract class DataModule {
     abstract fun bindsActionRepository(
         actionsRepositoryImpl: ActionsRepositoryImpl
     ): ActionsRepository
-
-    @Binds
-    abstract fun bindsActionCompletionsRepository(
-        actionCompletionsRepositoryImpl: ActionCompletionsRepositoryImpl
-    ): ActionCompletionsRepository
 
     @Binds
     abstract fun bindsProgressRepository(

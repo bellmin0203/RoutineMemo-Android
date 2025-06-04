@@ -27,14 +27,58 @@ interface ActionDao {
     @Query("SELECT * FROM action_tb WHERE obstacleId = :obstacleId ORDER BY createdAt ASC")
     suspend fun getActionsByObstacleId(obstacleId: Long): Flow<List<ActionEntity>>
 
-    @Query("SELECT * FROM action_completions_tb WHERE actionId = :actionId AND isCompleted = 1")
-    suspend fun getActionCompletionsByActionId(actionId: Long): Flow<List<ActionCompletionsEntity>>
 
-    @Query("SELECT * FROM action_completions_tb WHERE actionId = :actionId AND completionDate = :date")
-    suspend fun getActionCompletionByDate(actionId: Long, date: Long): ActionCompletionsEntity?
-
+    //==============================================================================================
+    //  ActionCompletion
+    //==============================================================================================
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertActionCompletion(actionCompletion: ActionCompletionsEntity)
+
+    @Query("SELECT * FROM action_completions_tb WHERE actionId = :actionId")
+    suspend fun getActionCompletionsByActionId(actionId: Long): Flow<List<ActionCompletionsEntity>>
+
+    @Query("SELECT * FROM action_completions_tb WHERE actionId = :actionId AND completionEndDate <= :date")
+    suspend fun getActionCompletionBeforeDate(
+        actionId: Long,
+        date: Long
+    ): List<ActionCompletionsEntity>?
+
+    @Query(
+        """
+        SELECT A.*
+        FROM action_tb AS A
+        INNER JOIN action_completions_tb AS AC
+        ON A.id = AC.actionId
+        WHERE A.id = :actionId AND AC.isCompleted = 1
+    """
+    )
+    fun getCompletedActions(actionId: Long): Flow<List<ActionEntity>?>
+
+    @Query(
+        """
+        SELECT A.*
+        FROM action_tb AS A
+        INNER JOIN action_completions_tb AS AC
+        ON A.id = AC.actionId
+        WHERE A.id = :actionId AND AC.isCompleted = 1 AND AC.completionEndDate <= :targetDate
+    """
+    )
+    fun getCompletedActionsBeforeDate(actionId: Long, targetDate: Long): Flow<List<ActionEntity>?>
+
+    @Query(
+        """
+        SELECT A.*
+        FROM action_tb AS A
+        INNER JOIN action_completions_tb AS AC
+        ON A.id = AC.actionId
+        WHERE A.id = :actionId AND AC.isCompleted = 1 AND AC.completionEndDate = :targetDate
+    """
+    )
+    fun getCompletedActionsByDate(actionId: Long, targetDate: Long): Flow<List<ActionEntity>?>
+
+
+
+
 
     // 진행 상황 계산을 위한 쿼리 예시 (복잡해질 수 있으니 Room에서 직접 계산하거나 Repository 레이어에서 처리하는 것이 좋습니다.)
     // SELECT

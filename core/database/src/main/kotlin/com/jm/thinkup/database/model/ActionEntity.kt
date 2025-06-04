@@ -6,6 +6,8 @@ import androidx.room.PrimaryKey
 import com.jm.thinkup.domain.model.ActionData
 import com.jm.thinkup.domain.model.ActionId
 import com.jm.thinkup.domain.model.GoalId
+import com.jm.thinkup.domain.model.ObstacleId
+import kotlinx.serialization.json.Json
 import java.time.Instant
 
 @Entity(
@@ -31,7 +33,7 @@ data class ActionEntity(
     val obstacleId: Long,
     val description: String,
     val isRepeat: Boolean = false,
-    val repeatType: Int,
+    val repeatType: String? = null,
     val endDate: Long,
     val notificationEnabled: Boolean = false,
     val notificationTime: Long,
@@ -43,13 +45,13 @@ fun ActionEntity.toDomainModel(): ActionData =
     ActionData(
         id = ActionId(id),
         goalId = GoalId(goalId),
-        obstacleId = obstacleId,
+        obstacleId = ObstacleId(obstacleId),
         description = description,
         isRepeat = isRepeat,
-        repeatType = repeatType,
+        repeatType = repeatType?.let { Json.decodeFromString(it) },
         endDate = Instant.ofEpochMilli(endDate),
         notificationEnabled = notificationEnabled,
-        notificationTime = notificationTime,
+        notificationTime = Instant.ofEpochMilli(notificationTime),
         createdAt = Instant.ofEpochMilli(createdAt),
         extendEndDate = extendEndDate,
     )
@@ -58,13 +60,13 @@ fun ActionData.toEntity(): ActionEntity =
     ActionEntity(
         id = id.value,
         goalId = goalId.value,
-        obstacleId = obstacleId,
+        obstacleId = obstacleId.value,
         description = description,
         isRepeat = isRepeat,
-        repeatType = repeatType,
+        repeatType = repeatType?.let { Json.encodeToString(it) },
         endDate = endDate.toEpochMilli(),
         notificationEnabled = notificationEnabled,
-        notificationTime = notificationTime,
+        notificationTime = notificationTime.toEpochMilli(),
         createdAt = createdAt.toEpochMilli(),
         extendEndDate = extendEndDate,
     )

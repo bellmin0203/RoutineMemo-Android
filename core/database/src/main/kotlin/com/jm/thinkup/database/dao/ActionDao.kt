@@ -34,6 +34,9 @@ interface ActionDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertActionCompletion(actionCompletion: ActionCompletionsEntity)
 
+    @Query("SELECT * FROM action_completions_tb WHERE actionId = :actionId AND completionEndDate = :date")
+    suspend fun getActionCompletionByDate(actionId: Long, date: Long): ActionCompletionsEntity?
+
     @Query("SELECT * FROM action_completions_tb WHERE actionId = :actionId")
     suspend fun getActionCompletionsByActionId(actionId: Long): Flow<List<ActionCompletionsEntity>>
 
@@ -76,8 +79,8 @@ interface ActionDao {
     )
     fun getCompletedActionsByDate(actionId: Long, targetDate: Long): Flow<List<ActionEntity>?>
 
-
-
+    @Update
+    suspend fun updateActionCompletion(actionCompletion: ActionCompletionsEntity)
 
 
     // 진행 상황 계산을 위한 쿼리 예시 (복잡해질 수 있으니 Room에서 직접 계산하거나 Repository 레이어에서 처리하는 것이 좋습니다.)

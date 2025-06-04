@@ -1,5 +1,6 @@
 package com.jm.thinkup.data.repository
 
+import android.util.Log
 import com.jm.thinkup.database.dao.ActionDao
 import com.jm.thinkup.database.model.toDomainModel
 import com.jm.thinkup.database.model.toEntity
@@ -50,38 +51,75 @@ class ActionsRepositoryImpl constructor(
     //==============================================================================================
     override suspend fun updateActionCompletion(
         actionId: ActionId,
-        completionEndDate: Long,
+        completionEndDate: Instant,
         isCompleted: Boolean
     ) {
-        TODO("Not yet implemented")
+        // Get ActionCompletionEntity by actionId and completionEndDate
+        val actionCompletionEntity = actionDao.getActionCompletionByDate(
+            actionId = actionId.value,
+            date = completionEndDate.toEpochMilli()
+        )
+
+        // Update ActionCompletionEntity if found, otherwise print log
+        if (actionCompletionEntity != null) {
+            val updatedEntity = actionCompletionEntity.copy(isCompleted = isCompleted)
+            actionDao.updateActionCompletion(updatedEntity)
+        } else {
+            Log.w(
+                "ActionsRepository",
+                "Attempted to update a non-existent action completion. ActionId: ${actionId.value}, Date: $completionEndDate"
+            )
+        }
     }
 
     override suspend fun getActionCompletionsByActionId(actionId: ActionId): Flow<List<ActionCompletion>> {
-        TODO("Not yet implemented")
+        return actionDao.getActionCompletionsByActionId(actionId = actionId.value)
+            .map { actionCompletionEntityList ->
+                actionCompletionEntityList.map { actionCompletionEntity ->
+                    actionCompletionEntity.toDomainModel()
+                }
+            }
     }
 
     override suspend fun getActionCompletionsBeforeDate(
         actionId: ActionId,
         date: Instant
-    ): Flow<List<ActionCompletion>> {
-        TODO("Not yet implemented")
+    ): List<ActionCompletion>? {
+        return actionDao.getActionCompletionBeforeDate(
+            actionId = actionId.value,
+            date = date.toEpochMilli()
+        )?.map {
+            it.toDomainModel()
+        }
     }
 
-    override suspend fun getCompletedActions(actionId: ActionId): Flow<List<ActionData>> {
-        TODO("Not yet implemented")
+    override suspend fun getCompletedActions(actionId: ActionId): Flow<List<ActionData>?> {
+        return actionDao.getCompletedActions(actionId = actionId.value).map { actionEntityList ->
+            actionEntityList?.map { it.toDomainModel() }
+        }
     }
 
     override suspend fun getCompletedActionsBeforeDate(
         actionId: ActionId,
         date: Instant
-    ): Flow<List<ActionData>> {
-        TODO("Not yet implemented")
+    ): Flow<List<ActionData>?> {
+        return actionDao.getCompletedActionsBeforeDate(
+            actionId = actionId.value,
+            targetDate = date.toEpochMilli()
+        ).map { actionEntityList ->
+            actionEntityList?.map { it.toDomainModel() }
+        }
     }
 
     override suspend fun getCompletedActionsByDate(
         actionId: ActionId,
         date: Instant
-    ): Flow<List<ActionData>> {
-        TODO("Not yet implemented")
+    ): Flow<List<ActionData>?> {
+        return actionDao.getCompletedActionsByDate(
+            actionId = actionId.value,
+            targetDate = date.toEpochMilli()
+        ).map { actionEntityList ->
+            actionEntityList?.map { it.toDomainModel() }
+        }
     }
 }

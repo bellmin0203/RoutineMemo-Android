@@ -24,24 +24,27 @@ interface ActionsRepository {
     //==============================================================================================
     suspend fun updateActionCompletion(
         actionId: ActionId,
-        completionEndDate: Long,
+        completionEndDate: Instant,
         isCompleted: Boolean
     )
 
-    suspend fun getActionCompletionsByActionId(actionId: ActionId): Flow<List<ActionCompletion>>
+    suspend fun getActionCompletionsByActionId(actionId: ActionId): Flow<List<ActionCompletion>?>
 
     suspend fun getActionCompletionsBeforeDate(
         actionId: ActionId,
         date: Instant
-    ): Flow<List<ActionCompletion>>
+    ): List<ActionCompletion>?
 
-    suspend fun getCompletedActions(actionId: ActionId): Flow<List<ActionData>>
+    suspend fun getCompletedActions(actionId: ActionId): Flow<List<ActionData>?>
 
     suspend fun getCompletedActionsBeforeDate(
         actionId: ActionId,
         date: Instant
-    ): Flow<List<ActionData>>
+    ): Flow<List<ActionData>?>
 
-    suspend fun getCompletedActionsByDate(actionId: ActionId, date: Instant): Flow<List<ActionData>>
+    suspend fun getCompletedActionsByDate(
+        actionId: ActionId,
+        date: Instant
+    ): Flow<List<ActionData>?>
 
 }

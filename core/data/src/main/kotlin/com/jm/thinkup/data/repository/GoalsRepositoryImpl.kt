@@ -8,8 +8,9 @@ import com.jm.thinkup.domain.model.GoalId
 import com.jm.thinkup.domain.repository.GoalsRepository
 import com.jm.util.mapListToDomainModel
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class GoalsRepositoryImpl constructor(
+class GoalsRepositoryImpl @Inject constructor(
     private val goalDao: GoalDao
 ) : GoalsRepository {
     override suspend fun createGoal(goal: Goal): Boolean {

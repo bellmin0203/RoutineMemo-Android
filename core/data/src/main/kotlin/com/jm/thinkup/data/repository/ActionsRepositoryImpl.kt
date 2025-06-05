@@ -17,8 +17,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
 import java.time.Instant
+import javax.inject.Inject
 
-class ActionsRepositoryImpl constructor(
+class ActionsRepositoryImpl @Inject constructor(
     private val actionDao: ActionDao,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) : ActionsRepository {

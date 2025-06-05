@@ -8,8 +8,9 @@ import com.jm.thinkup.domain.model.Obstacle
 import com.jm.thinkup.domain.repository.ObstaclesRepository
 import com.jm.util.mapListToDomainModel
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class ObstaclesRepositoryImpl constructor(
+class ObstaclesRepositoryImpl @Inject constructor(
     private val obstaclesDao: ObstacleDao
 ) : ObstaclesRepository {
     override suspend fun createObstacle(obstacle: Obstacle) {

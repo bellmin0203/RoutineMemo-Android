@@ -7,3 +7,7 @@ plugins {
 android {
     setNamespace("feature.home")
 }
+
+dependencies {
+    implementation(libs.kotlinx.immutable)
+}

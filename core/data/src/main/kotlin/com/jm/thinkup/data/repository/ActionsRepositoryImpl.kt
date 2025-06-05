@@ -12,7 +12,6 @@ import com.jm.thinkup.domain.model.GoalId
 import com.jm.thinkup.domain.model.ObstacleId
 import com.jm.thinkup.domain.repository.ActionsRepository
 import com.jm.util.mapListToDomainModel
-import com.jm.util.mapNullableListToDomainModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
@@ -95,40 +94,38 @@ class ActionsRepositoryImpl constructor(
     override suspend fun getActionCompletionsBeforeDate(
         actionId: ActionId,
         date: Instant
-    ): List<ActionCompletion>? {
+    ): List<ActionCompletion> {
         return withContext(ioDispatcher) {
             actionDao.getActionCompletionBeforeDate(
                 actionId = actionId.value,
                 targetDate = date.toEpochMilli()
-            ).mapNullableListToDomainModel { toDomainModel() }
+            ).mapListToDomainModel { toDomainModel() }
         }
     }
 
-    override suspend fun getCompletedActions(actionId: ActionId): Flow<List<ActionData>?> {
+    override suspend fun getCompletedActions(actionId: ActionId): Flow<List<ActionData>> {
         return actionDao.getCompletedActions(actionId = actionId.value)
-            .mapNullableListToDomainModel { toDomainModel() }
+            .mapListToDomainModel { toDomainModel() }
             .flowOn(ioDispatcher)
     }
 
     override suspend fun getCompletedActionsBeforeDate(
         actionId: ActionId,
         date: Instant
-    ): Flow<List<ActionData>?> {
+    ): Flow<List<ActionData>> {
         return actionDao.getCompletedActionsBeforeDate(
             actionId = actionId.value,
             targetDate = date.toEpochMilli()
-        ).mapNullableListToDomainModel { toDomainModel() }
-            .flowOn(ioDispatcher)
+        ).mapListToDomainModel { toDomainModel() }.flowOn(ioDispatcher)
     }
 
     override suspend fun getCompletedActionsByDate(
         actionId: ActionId,
         date: Instant
-    ): Flow<List<ActionData>?> {
+    ): Flow<List<ActionData>> {
         return actionDao.getCompletedActionsByDate(
             actionId = actionId.value,
             targetDate = date.toEpochMilli()
-        ).mapNullableListToDomainModel { toDomainModel() }
-            .flowOn(ioDispatcher)
+        ).mapListToDomainModel { toDomainModel() }.flowOn(ioDispatcher)
     }
 }

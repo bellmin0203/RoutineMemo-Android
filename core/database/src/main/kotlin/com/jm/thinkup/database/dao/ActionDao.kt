@@ -69,7 +69,7 @@ interface ActionDao {
         WHERE A.id = :actionId AND AC.isCompleted = 1 AND AC.completionEndDate <= :targetDate
     """
     )
-    fun getCompletedActionsBeforeDate(actionId: Long, targetDate: Long): Flow<List<ActionEntity>?>
+    fun getCompletedActionsBeforeDate(actionId: Long, targetDate: Long): Flow<List<ActionEntity>>
 
     @Query(
         """
@@ -80,7 +80,7 @@ interface ActionDao {
         WHERE A.id = :actionId AND AC.isCompleted = 1 AND AC.completionEndDate = :targetDate
     """
     )
-    fun getCompletedActionsByDate(actionId: Long, targetDate: Long): Flow<List<ActionEntity>?>
+    fun getCompletedActionsByDate(actionId: Long, targetDate: Long): Flow<List<ActionEntity>>
 
     @Update
     suspend fun updateActionCompletion(actionCompletion: ActionCompletionsEntity)

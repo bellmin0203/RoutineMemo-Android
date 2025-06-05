@@ -6,8 +6,8 @@ import com.jm.thinkup.database.model.toEntity
 import com.jm.thinkup.domain.model.Goal
 import com.jm.thinkup.domain.model.GoalId
 import com.jm.thinkup.domain.repository.GoalsRepository
+import com.jm.util.mapListToDomainModel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 
 class GoalsRepositoryImpl constructor(
     private val goalDao: GoalDao
@@ -18,11 +18,7 @@ class GoalsRepositoryImpl constructor(
     }
 
     override suspend fun getAllGoals(): Flow<List<Goal>> {
-        return goalDao.getAllGoals().map { goalEntityList ->
-            goalEntityList.map { goalEntity ->
-                goalEntity.toDomainModel()
-            }
-        }
+        return goalDao.getAllGoals().mapListToDomainModel { toDomainModel() }
     }
 
     override suspend fun getGoalById(id: GoalId): Goal? {

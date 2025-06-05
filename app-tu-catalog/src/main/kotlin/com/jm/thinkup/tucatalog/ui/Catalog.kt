@@ -13,8 +13,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.jm.designsystem.component.TuProgressBar
 import com.jm.designsystem.theme.ThinkUpTheme
+import com.jm.thinkup.ProgressBarWithText
 
 @Composable
 fun TuCatalog(modifier: Modifier = Modifier) {
@@ -35,7 +35,10 @@ fun TuCatalog(modifier: Modifier = Modifier) {
                         style = MaterialTheme.typography.headlineSmall
                     )
                 }
-                item { TuProgressBar(progress = 0.5f) }
+                item { ProgressBarWithText(title = "Learn Spanish", progress = 0.3f) }
+                item { ProgressBarWithText(title = "Learn Spanish", progress = 0.5f) }
+                item { ProgressBarWithText(title = "Learn Spanish", progress = 0.7f) }
+                item { ProgressBarWithText(title = "Learn Spanish", progress = 0.9f) }
             }
         }
     }

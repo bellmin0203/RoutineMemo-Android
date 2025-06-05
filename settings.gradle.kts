@@ -46,3 +46,4 @@ include(
     ":feature:action",
     ":feature:progress"
 )
+include(":app-tu-catalog")

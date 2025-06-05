@@ -10,11 +10,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.jm.designsystem.component.TuProgressBar
 import com.jm.designsystem.component.rememberSelectedColor
 import com.jm.designsystem.theme.AppTypography
+import com.jm.designsystem.theme.ThemePreviews
 import com.jm.designsystem.theme.ThinkUpTheme
 
 @Composable
@@ -49,7 +49,7 @@ fun ProgressBarWithText(
     }
 }
 
-@Preview
+@ThemePreviews
 @Composable
 private fun ProgressBarWithTextPreview() {
     ThinkUpTheme {

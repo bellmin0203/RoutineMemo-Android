@@ -14,12 +14,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.jm.designsystem.theme.Blue600
 import com.jm.designsystem.theme.Green600
 import com.jm.designsystem.theme.Orange600
 import com.jm.designsystem.theme.Purple600
+import com.jm.designsystem.theme.ThemePreviews
 import com.jm.designsystem.theme.ThinkUpTheme
 import com.jm.designsystem.theme.Yellow600
 import kotlin.random.Random
@@ -64,7 +64,7 @@ fun rememberSelectedColor(): Color {
     return selectedColor
 }
 
-@Preview
+@ThemePreviews
 @Composable
 private fun TuProgressBarPreview() {
     ThinkUpTheme {

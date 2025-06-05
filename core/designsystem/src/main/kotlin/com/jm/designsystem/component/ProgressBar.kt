@@ -2,9 +2,9 @@ package com.jm.designsystem.component
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LinearProgressIndicator
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ProgressIndicatorDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -15,7 +15,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.jm.designsystem.theme.Blue600
+import com.jm.designsystem.theme.Green600
+import com.jm.designsystem.theme.Orange600
+import com.jm.designsystem.theme.Purple600
 import com.jm.designsystem.theme.ThinkUpTheme
+import com.jm.designsystem.theme.Yellow600
 import kotlin.random.Random
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -35,19 +41,23 @@ fun TuProgressBar(
 
     LinearProgressIndicator(
         progress = { animatedProgress },
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .height(6.dp),
         trackColor = Color.DarkGray,
         color = color,
+        gapSize = 0.dp,
     )
 }
 
 @Composable
 fun rememberSelectedColor(): Color {
     val colors = listOf(
-        MaterialTheme.colorScheme.primaryContainer,
-        MaterialTheme.colorScheme.secondaryContainer,
-        MaterialTheme.colorScheme.tertiaryContainer,
-        MaterialTheme.colorScheme.surfaceContainer,
+        Purple600,
+        Blue600,
+        Yellow600,
+        Green600,
+        Orange600,
     )
     val selectedColor = colors[Random.nextInt(colors.size)]
     return selectedColor

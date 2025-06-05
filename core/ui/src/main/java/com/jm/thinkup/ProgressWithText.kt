@@ -39,13 +39,13 @@ fun ProgressBarWithText(
                 text = "${(progress * 100).toInt()}%",
                 modifier = Modifier.align(Alignment.CenterEnd),
                 style = AppTypography.labelSmall,
-                color = color,
+                color = color.copy(alpha = 0.8f),
             )
         }
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        TuProgressBar(progress = progress)
+        TuProgressBar(progress = progress, color = color)
     }
 }
 

@@ -2,6 +2,7 @@ package com.jm.thinkup.database.model
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.jm.thinkup.domain.model.ActionData
 import com.jm.thinkup.domain.model.ActionId
@@ -25,6 +26,10 @@ import java.time.Instant
             childColumns = ["obstacleId"],
             onDelete = ForeignKey.CASCADE
         )
+    ],
+    indices = [
+        Index(value = ["goalId"]),      // goalId에 대한 인덱스
+        Index(value = ["obstacleId"])   // obstacleId에 대한 인덱스
     ]
 )
 data class ActionEntity(

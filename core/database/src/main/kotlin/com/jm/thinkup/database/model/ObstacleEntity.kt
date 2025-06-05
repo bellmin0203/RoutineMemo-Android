@@ -2,6 +2,7 @@ package com.jm.thinkup.database.model
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.jm.thinkup.domain.model.GoalId
 import com.jm.thinkup.domain.model.Obstacle
@@ -16,7 +17,8 @@ import com.jm.thinkup.domain.model.ObstacleId
             childColumns = ["goalId"],
             onDelete = ForeignKey.CASCADE
         )
-    ]
+    ],
+    indices = [Index(value = ["goalId"])]
 )
 data class ObstacleEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,

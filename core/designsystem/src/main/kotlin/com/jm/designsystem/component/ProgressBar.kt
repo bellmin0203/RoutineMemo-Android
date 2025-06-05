@@ -47,6 +47,7 @@ fun TuProgressBar(
         trackColor = Color.DarkGray,
         color = color,
         gapSize = 0.dp,
+        drawStopIndicator = {}
     )
 }
 

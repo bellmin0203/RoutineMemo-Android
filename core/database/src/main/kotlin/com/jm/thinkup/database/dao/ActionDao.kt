@@ -22,10 +22,10 @@ interface ActionDao {
     suspend fun deleteAction(action: ActionEntity)
 
     @Query("SELECT * FROM action_tb WHERE goalId = :goalId ORDER BY createdAt ASC")
-    suspend fun getActionsByGoalId(goalId: Long): Flow<List<ActionEntity>>
+    fun getActionsByGoalId(goalId: Long): Flow<List<ActionEntity>>
 
     @Query("SELECT * FROM action_tb WHERE obstacleId = :obstacleId ORDER BY createdAt ASC")
-    suspend fun getActionsByObstacleId(obstacleId: Long): Flow<List<ActionEntity>>
+    fun getActionsByObstacleId(obstacleId: Long): Flow<List<ActionEntity>>
 
 
     //==============================================================================================
@@ -41,13 +41,13 @@ interface ActionDao {
     ): ActionCompletionsEntity?
 
     @Query("SELECT * FROM action_completions_tb WHERE actionId = :actionId")
-    suspend fun getActionCompletionsByActionId(actionId: Long): Flow<List<ActionCompletionsEntity>>
+    fun getActionCompletionsByActionId(actionId: Long): Flow<List<ActionCompletionsEntity>>
 
     @Query("SELECT * FROM action_completions_tb WHERE actionId = :actionId AND completionEndDate <= :targetDate")
     suspend fun getActionCompletionBeforeDate(
         actionId: Long,
         targetDate: Long
-    ): List<ActionCompletionsEntity>?
+    ): List<ActionCompletionsEntity>
 
     @Query(
         """
@@ -58,7 +58,7 @@ interface ActionDao {
         WHERE A.id = :actionId AND AC.isCompleted = 1
     """
     )
-    fun getCompletedActions(actionId: Long): Flow<List<ActionEntity>?>
+    fun getCompletedActions(actionId: Long): Flow<List<ActionEntity>>
 
     @Query(
         """

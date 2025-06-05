@@ -15,7 +15,7 @@ interface ObstacleDao {
     suspend fun insertObstacle(obstacle: ObstacleEntity): Long
 
     @Query("SELECT * FROM obstacle_tb WHERE goalId = :goalId ORDER BY id ASC")
-    suspend fun getObstaclesByGoalId(goalId: Long): Flow<List<ObstacleEntity>>
+    fun getObstaclesByGoalId(goalId: Long): Flow<List<ObstacleEntity>>
 
     @Update
     suspend fun updateObstacle(obstacle: ObstacleEntity)

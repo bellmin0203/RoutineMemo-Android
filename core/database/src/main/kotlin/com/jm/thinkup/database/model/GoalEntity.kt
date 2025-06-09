@@ -11,7 +11,8 @@ data class GoalEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val title: String,
     val deadlineDate: Long,
-    val createdAt: Long = System.currentTimeMillis()
+    val createdAt: Long = System.currentTimeMillis(),
+    val isCompleted: Boolean = false,
 )
 
 fun GoalEntity.toDomainModel(): Goal =
@@ -19,7 +20,8 @@ fun GoalEntity.toDomainModel(): Goal =
         id = GoalId(id),
         title = title,
         deadlineDate = Instant.ofEpochMilli(deadlineDate),
-        createdAt = Instant.ofEpochMilli(createdAt)
+        createdAt = Instant.ofEpochMilli(createdAt),
+        isCompleted = isCompleted
     )
 
 fun Goal.toEntity(): GoalEntity =
@@ -27,5 +29,6 @@ fun Goal.toEntity(): GoalEntity =
         id = id.value,
         title = title,
         deadlineDate = deadlineDate.toEpochMilli(),
-        createdAt = createdAt.toEpochMilli()
+        createdAt = createdAt.toEpochMilli(),
+        isCompleted = isCompleted
     )

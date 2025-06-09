@@ -1,6 +1,7 @@
 package com.jm.thinkup.domain.model
 
-import java.time.Instant
+import kotlinx.datetime.Instant
+
 
 data class ActionCompletion(
     val actionId: ActionId,

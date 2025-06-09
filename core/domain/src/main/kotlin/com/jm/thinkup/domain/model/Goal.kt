@@ -1,12 +1,14 @@
 package com.jm.thinkup.domain.model
 
-import java.time.Instant
+import kotlinx.datetime.Clock
+import kotlinx.datetime.Instant
+
 
 data class Goal(
     val id: GoalId,
     val title: String,
     val deadlineDate: Instant,
-    val createdAt: Instant = Instant.now(),
+    val createdAt: Instant = Clock.System.now(),
     val isCompleted: Boolean = false,
 )
 

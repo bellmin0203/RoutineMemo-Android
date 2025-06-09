@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.jm.thinkup.domain.model.Goal
 import com.jm.thinkup.domain.model.GoalId
-import java.time.Instant
+import kotlinx.datetime.Instant
 
 @Entity(tableName = "goal_tb")
 data class GoalEntity(
@@ -19,8 +19,8 @@ fun GoalEntity.toDomainModel(): Goal =
     Goal(
         id = GoalId(id),
         title = title,
-        deadlineDate = Instant.ofEpochMilli(deadlineDate),
-        createdAt = Instant.ofEpochMilli(createdAt),
+        deadlineDate = Instant.fromEpochMilliseconds(deadlineDate),
+        createdAt = Instant.fromEpochMilliseconds(createdAt),
         isCompleted = isCompleted
     )
 
@@ -28,7 +28,7 @@ fun Goal.toEntity(): GoalEntity =
     GoalEntity(
         id = id.value,
         title = title,
-        deadlineDate = deadlineDate.toEpochMilli(),
-        createdAt = createdAt.toEpochMilli(),
+        deadlineDate = deadlineDate.toEpochMilliseconds(),
+        createdAt = createdAt.toEpochMilliseconds(),
         isCompleted = isCompleted
     )

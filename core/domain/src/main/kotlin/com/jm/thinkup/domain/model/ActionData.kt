@@ -1,8 +1,9 @@
 package com.jm.thinkup.domain.model
 
+import kotlinx.datetime.Clock
+import kotlinx.datetime.DayOfWeek
+import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable
-import java.time.DayOfWeek
-import java.time.Instant
 
 data class ActionData(
     val id: ActionId,
@@ -11,11 +12,11 @@ data class ActionData(
     val description: String,
     val isRepeat: Boolean = false,
     val repeatType: RepeatType? = null,
-    val startDate: Instant = Instant.now(),
+    val startDate: Instant = Clock.System.now(),
     val endDate: Instant,
     val notificationEnabled: Boolean = false,
     val notificationTime: Instant,
-    val createdAt: Instant = Instant.now(),
+    val createdAt: Instant = Clock.System.now(),
     val extendEndDate: Boolean = false,
 )
 
@@ -50,6 +51,6 @@ sealed class RepeatType {
         override val intervalValue: Int,
         val weekOrdinal: Int,
         val dayOfWeek: DayOfWeek,
-        val month: java.time.Month
+        val month: kotlinx.datetime.Month
     ) : RepeatType()
 }

@@ -8,8 +8,8 @@ import com.jm.thinkup.domain.model.ActionData
 import com.jm.thinkup.domain.model.ActionId
 import com.jm.thinkup.domain.model.GoalId
 import com.jm.thinkup.domain.model.ObstacleId
+import kotlinx.datetime.Instant
 import kotlinx.serialization.json.Json
-import java.time.Instant
 
 @Entity(
     tableName = "action_tb",
@@ -55,11 +55,11 @@ fun ActionEntity.toDomainModel(): ActionData =
         description = description,
         isRepeat = isRepeat,
         repeatType = repeatType?.let { Json.decodeFromString(it) },
-        startDate = Instant.ofEpochMilli(startDate),
-        endDate = Instant.ofEpochMilli(endDate),
+        startDate = Instant.fromEpochMilliseconds(startDate),
+        endDate = Instant.fromEpochMilliseconds(endDate),
         notificationEnabled = notificationEnabled,
-        notificationTime = Instant.ofEpochMilli(notificationTime),
-        createdAt = Instant.ofEpochMilli(createdAt),
+        notificationTime = Instant.fromEpochMilliseconds(notificationTime),
+        createdAt = Instant.fromEpochMilliseconds(createdAt),
         extendEndDate = extendEndDate,
     )
 
@@ -71,11 +71,11 @@ fun ActionData.toEntity(): ActionEntity =
         description = description,
         isRepeat = isRepeat,
         repeatType = repeatType?.let { Json.encodeToString(it) },
-        startDate = startDate.toEpochMilli(),
-        endDate = endDate.toEpochMilli(),
+        startDate = startDate.toEpochMilliseconds(),
+        endDate = endDate.toEpochMilliseconds(),
         notificationEnabled = notificationEnabled,
-        notificationTime = notificationTime.toEpochMilli(),
-        createdAt = createdAt.toEpochMilli(),
+        notificationTime = notificationTime.toEpochMilliseconds(),
+        createdAt = createdAt.toEpochMilliseconds(),
         extendEndDate = extendEndDate,
     )
 

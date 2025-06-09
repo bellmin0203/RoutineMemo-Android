@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import com.jm.thinkup.domain.model.ActionCompletion
 import com.jm.thinkup.domain.model.ActionId
-import java.time.Instant
+import kotlinx.datetime.Instant
 
 @Entity(
     tableName = "action_completions_tb",
@@ -28,15 +28,15 @@ data class ActionCompletionsEntity(
 fun ActionCompletionsEntity.toDomainModel(): ActionCompletion =
     ActionCompletion(
         actionId = ActionId(actionId),
-        completionEndDate = Instant.ofEpochMilli(this@toDomainModel.completionEndDate),
+        completionEndDate = Instant.fromEpochMilliseconds(this@toDomainModel.completionEndDate),
         isCompleted = isCompleted,
-        completedAt = completedAt?.let { Instant.ofEpochMilli(it) }
+        completedAt = completedAt?.let { Instant.fromEpochMilliseconds(it) }
     )
 
 fun ActionCompletion.toEntity(): ActionCompletionsEntity =
     ActionCompletionsEntity(
         actionId = actionId.value,
-        completionEndDate = completionEndDate.toEpochMilli(),
+        completionEndDate = completionEndDate.toEpochMilliseconds(),
         isCompleted = isCompleted,
-        completedAt = completedAt?.toEpochMilli()
+        completedAt = completedAt?.toEpochMilliseconds()
     )

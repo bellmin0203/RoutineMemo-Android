@@ -11,6 +11,7 @@ data class ActionData(
     val description: String,
     val isRepeat: Boolean = false,
     val repeatType: RepeatType? = null,
+    val startDate: Instant = Instant.now(),
     val endDate: Instant,
     val notificationEnabled: Boolean = false,
     val notificationTime: Instant,

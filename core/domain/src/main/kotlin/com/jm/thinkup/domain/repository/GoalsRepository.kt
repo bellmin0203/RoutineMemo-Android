@@ -14,4 +14,6 @@ interface GoalsRepository {
     suspend fun updateGoal(goal: Goal)
 
     suspend fun deleteGoal(goal: Goal)
+
+    suspend fun getGoalProgress(goalId: GoalId): Flow<Pair<Int, Int>>
 }

@@ -32,4 +32,16 @@ interface GoalDao {
     // @Query("SELECT * FROM goals WHERE id = :goalId")
     // fun getGoalWithDetails(goalId: Long): Flow<GoalWithProblemsAndActions>
 
+    @Query(
+        """
+        SELECT 
+            COUNT(ac.actionId) AS totalActionCount,
+            COUNT(CASE WHEN ac.isCompleted = 1 THEN 1 END) AS completedActionCount
+        FROM action_tb AS a
+        INNER JOIN action_completions_tb AS ac ON a.id = ac.actionId
+        WHERE a.goalId = :goalId
+    """
+    )
+    fun getGoalProgress(goalId: Long): Flow<Pair<Int, Int>>
+
 }

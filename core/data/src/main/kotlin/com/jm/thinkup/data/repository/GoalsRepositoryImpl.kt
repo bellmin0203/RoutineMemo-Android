@@ -33,4 +33,8 @@ class GoalsRepositoryImpl @Inject constructor(
     override suspend fun deleteGoal(goal: Goal) {
         goalDao.deleteGoal(goal.toEntity())
     }
+
+    override suspend fun getGoalProgress(goalId: GoalId): Flow<Pair<Int, Int>> {
+        return goalDao.getGoalProgress(goalId = goalId.value)
+    }
 }

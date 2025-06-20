@@ -38,7 +38,7 @@ abstract class BaseViewModel<UI_STATE : UiState, UI_INTENT : UiIntent, SIDE_EFFE
     }
 
     @Composable
-    protected fun collectSideEffect(
+    fun collectSideEffect(
         lifecycleState: Lifecycle.State = Lifecycle.State.STARTED,
         consumeSideEffect: (sideEffect: SIDE_EFFECT) -> Unit
     ) {

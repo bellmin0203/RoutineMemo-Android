@@ -1,5 +1,11 @@
+import com.jm.thinkup.extension.setNamespace
+
 plugins {
-    alias(libs.plugins.tu.kotlin.library)
+    alias(libs.plugins.tu.android.library)
+}
+
+android {
+    setNamespace("core.util")
 }
 
 dependencies {

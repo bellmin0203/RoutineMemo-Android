@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="feature_home_title">홈</string>
+    <string name="feature_home_progress_overview">진행 상황</string>
+    <string name="feature_home_more">더 보기</string>
+    <string name="feature_home_today_action">오늘의 행동</string>
+    <string name="feature_home_view_all">View All</string>
 </resources>

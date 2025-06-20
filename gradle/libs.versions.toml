@@ -21,6 +21,8 @@ kotlinxDatetime = "0.6.1"
 # https://github.com/Kotlin/kotlinx.collections.immutable
 kotlinxImmutable = "0.3.8"
 
+jmlogVer = "1.0.1"
+
 # https://github.com/junit-team/junit4
 junit4 = "4.13.2"
 
@@ -86,6 +88,8 @@ androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navig
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinxDatetime" }
+
+jmlog = { group = "com.github.bellmin0203", name = "jmlog", version.ref = "jmlogVer" }
 
 junit4 = { group = "junit", name = "junit", version.ref = "junit4" }
 androidx-test-ext = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "androidxTestExt" }

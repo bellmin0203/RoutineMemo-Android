@@ -42,4 +42,5 @@ dependencies {
     implementation(projects.feature.goal)
     implementation(projects.feature.obstacle)
     implementation(projects.feature.progress)
+    implementation(projects.core.util)
 }

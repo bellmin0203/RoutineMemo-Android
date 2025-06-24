@@ -40,7 +40,8 @@ dependencies {
 
     implementation(projects.feature.home)
     implementation(projects.feature.goal)
-    implementation(projects.feature.obstacle)
-    implementation(projects.feature.progress)
+    implementation(projects.feature.planner)
+    implementation(projects.feature.thought)
+    implementation(projects.feature.memo)
     implementation(projects.core.util)
 }

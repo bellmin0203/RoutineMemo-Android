@@ -43,8 +43,9 @@ include(
 include(
     ":feature:home",
     ":feature:goal",
-    ":feature:obstacle",
-    ":feature:action",
-    ":feature:progress"
+    ":feature:planner",
+    ":feature:memo",
+    ":feature:thought",
+    ":feature:widget"
 )
 include(":app-tu-catalog")
